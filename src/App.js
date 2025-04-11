@@ -1,13 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import { Two } from './Too';
+import Hehe from "./Too"
+
+function One() {
+  return <div>Chao ban</div>;
+}
+
+//create component too in another file
 
 function App() {
   return (
-    <div className="App">
+    <div className="Container">
+      <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
           className="App-link"
@@ -15,9 +23,13 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Hello PNV26
         </a>
+        <One></One>
+        <Two></Two>
+        <Hehe/>
       </header>
+    </div>
     </div>
   );
 }
