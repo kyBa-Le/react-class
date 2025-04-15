@@ -1,0 +1,10 @@
+#nav-bar {
+    padding: 10px;
+    background-color: grey;
+    width: 100vw;
+    display: flex;
+    gap: 2vw;
+}
+#nav-bar > a {
+    color: white;
+}
