@@ -1,10 +1,12 @@
+import { Calculate } from "./task/CalculateGrade";
 import { MyForm } from "./task/Form";
+import { OrderDrink } from "./task/Menu";
 
 
 function App() {
   return (
     <>
-    <MyForm></MyForm>
+    <OrderDrink></OrderDrink>
     </>
   );
 }
