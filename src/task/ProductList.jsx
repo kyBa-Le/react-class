@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./ProductList.css";
+import getSampleData from "./Data";
 
 export function ShowProducts() {
 
@@ -7,9 +8,10 @@ export function ShowProducts() {
 
     useEffect(() => {
         const data = localStorage.getItem("products");
-        console.log(data);
-        if (data) {
-            setProducts(JSON.parse(data));
+        const mergedData = data ? [...getSampleData(), ...JSON.parse(data)] : getSampleData();
+        setProducts(mergedData);
+        if (!data) {
+            localStorage.setItem("products", JSON.stringify(getSampleData()));
         }
     }, []);
     

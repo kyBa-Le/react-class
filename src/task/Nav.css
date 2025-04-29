@@ -1,0 +1,26 @@
+/* Nav.css */
+
+.navbar {
+    position: fixed; /* nằm trên cùng */
+    top: 0;
+    width: 100%;
+    background-color: #222; /* màu tối */
+    display: flex;
+    justify-content: center; /* căn giữa các link */
+    gap: 20px; /* khoảng cách giữa các link */
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5); /* đổ bóng nhẹ */
+    z-index: 1000; /* đảm bảo nằm trên các phần khác */
+}
+
+.nav-link {
+    color: #f1f1f1;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #4CAF50; /* đổi màu khi hover */
+}
