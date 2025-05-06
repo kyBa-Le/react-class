@@ -4,7 +4,7 @@
     position: fixed; /* nằm trên cùng */
     top: 0;
     width: 100%;
-    background-color: #222; /* màu tối */
+    background-color: #f7c1c1; /* màu tối */
     display: flex;
     justify-content: center; /* căn giữa các link */
     gap: 20px; /* khoảng cách giữa các link */
@@ -23,4 +23,21 @@
 
 .nav-link:hover {
     color: #4CAF50; /* đổi màu khi hover */
+}
+
+/* Nav.css */
+.nav-link {
+    text-decoration: none; /* Remove default underline */
+    color: #000; /* Default color */
+    padding: 10px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #007BFF; /* Change color on hover */
+}
+
+.nav-link.active {
+    color: #FF5733; /* Different color for the active page */
+    font-weight: bold; /* Optional: Make it bold for emphasis */
 }
