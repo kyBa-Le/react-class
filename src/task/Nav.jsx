@@ -6,6 +6,7 @@ export function Nav() {
         <nav className="navbar">
             <Link to="/product/add" className="nav-link">Add</Link>
             <Link to="/product/show" className="nav-link">Show</Link>
+            <Link to="/order" className="nav-link">Order</Link>
         </nav>
     );
 }

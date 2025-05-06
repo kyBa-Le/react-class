@@ -10,11 +10,11 @@ import { Nav } from "./task/Nav";
 function App() {
   return (
     <>
-      
       <Nav></Nav>
       <Routes>
         <Route path="/product/add" Component={FormProduct}></Route>
         <Route path="/product/show" Component={ShowProducts}></Route>
+        <Route path="/order" Component={OrderDrink}></Route>
       </Routes>
     </>
   );
