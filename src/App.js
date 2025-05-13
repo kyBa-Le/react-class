@@ -1,29 +1,34 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Calculate } from "./task/CalculateGrade";
-import { MyForm } from "./task/Form";
-import { OrderDrink } from "./task/Menu";
-import { ShowProducts } from "./task/ProductList";
-import { FormProduct } from "./task/FormProduct";
-import { Nav } from "./task/Nav";
-import { About } from "./task/About";
-import { Contact } from "./task/Contact";
-
-
-function App() {
+import React, {Component} from 'react';
+import './App.css';
+import AllProduct from './components/AllProduct.js';
+import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
+import routes from './routes.js';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+class App extends Component {
+  render(){
   return (
-    <>
-    
-      <Nav></Nav>
-      <div style={{ height: "100px" }}></div>
-      <Routes>
-        <Route path="/product/add" Component={FormProduct}></Route>
-        <Route path="/product/show" Component={ShowProducts}></Route>
-        <Route path="/order" Component={OrderDrink}></Route>
-        <Route path="/about" Component={About}></Route>
-        <Route path="/contact" Component={Contact}></Route>
-      </Routes>
-    </>
-  );
+    <Router>
+    <ToastContainer />
+      <Switch>  
+        {this.showContentMenu(routes)} 
+      </Switch>    
+    </Router>  
+    );
+
+  }
+  showContentMenu = (routes) =>{
+    var result = null;
+    if (routes.length > 0) {
+      result = routes.map((route, index) =>{
+        return (
+            <Route key ={index} path = {route.path} exact = {route.exact} component={route.main} />
+          );
+      });
+    }
+    return result;
+  }
+
 }
 
 export default App;
