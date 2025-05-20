@@ -51,22 +51,27 @@ class Add extends Component {
      }
     }
 
-    onChange = (event) =>{
-      var target =event.target;
-      var name =target.name;
-      var type =target.type;
-      var value =target.value;
+    onChange = (event) => {
+      const target = event.target;
+      const name = target.name;
+      const type = target.type;
+    
       if (name === 'tinhtranghang') {
-        value =target.value === 'true' ? true :false;
+        this.setState({ [name]: target.value === 'true' });
+      } else if (type === 'file') {
+        const file = target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            this.setState({ image: reader.result });
+          };
+          reader.readAsDataURL(file);
+        }
+      } else {
+        this.setState({ [name]: target.value });
       }
-      if (type === 'file') {
-        value = this.image.value.replace( /C:\\fakepath\\/i, "/images/" );
-      }
-
-      this.setState({
-        [name] : value,
-      });
-    }
+    };
+    
 
     onSave =(e) =>{
     	e.preventDefault();
@@ -143,80 +148,167 @@ class Add extends Component {
     	var { id, name, price, image , name_category, color, material
         , expiry_date, origin, description, tinhtranghang} = this.state;
   	return (
-  		      
-        <React.Fragment>
+      <React.Fragment>
         <div>
           <div id="wrapper">
             <Wrapper />
             <div id="content-wrapper" className="d-flex flex-column">
-            <div id="contentt">
-           <Banner />
-            <div className="panel panel-warning col-md-8 ml">
-              <div className="container">
-              <div className="panel-body mt-4">
-                <form onSubmit = {this.onSave}>
-                  <div className="form-group">
-                    <label>Tên Sản phẩm :</label>
-                    <input type="text" name="name" value ={this.state.name} onChange ={this.onChange} className="form-control" />
+              <div id="contentt">
+                <Banner />
+                <div className="panel panel-warning col-md-8 ml">
+                  <div className="container">
+                    <div className="panel-body mt-4">
+                      <form onSubmit={this.onSave}>
+                        <div className="form-group">
+                          <label>Tên Sản phẩm :</label>
+                          <input
+                            type="text"
+                            name="name"
+                            value={this.state.name}
+                            onChange={this.onChange}
+                            className="form-control"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label>Giá Sản phẩm ($) :</label>
+                          <input
+                            type="number"
+                            name="price"
+                            value={this.state.price}
+                            onChange={this.onChange}
+                            className="form-control"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label>Chọn Ảnh :</label>
+                          <div className="form-group">
+                            <label>Chọn Ảnh :</label>
+                            <input
+                              type="file"
+                              name="image"
+                              onChange={this.onChange}
+                              className="form-control"
+                            />
+                            {/* Preview Image */}
+                            {image && (
+                              <img
+                                src={image}
+                                alt="Preview"
+                                style={{
+                                  height: "100px",
+                                  marginTop: "10px",
+                                  objectFit: "cover",
+                                  border: "1px solid #ddd",
+                                }}
+                              />
+                            )}
+                          </div>
+                        </div>
+                        <label>Loại sản phẩm:</label>
+                        <select
+                          className="form-control"
+                          name="name_category"
+                          value={this.state.name_category}
+                          onChange={this.onChange}
+                          required="required"
+                        >
+                          <option value="sản phẩm mới">mới</option>
+                          <option value="sản phẩm hot">hot</option>
+                          <option value="sản phẩm khuyến mãi">
+                            khuyến mãi
+                          </option>
+                        </select>
+                        <div className="form-group">
+                          <label>Màu bánh :</label>
+                          <input
+                            type="text"
+                            name="color"
+                            value={this.state.color}
+                            onChange={this.onChange}
+                            className="form-control"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label>Nguyên liệu :</label>
+                          <input
+                            type="text"
+                            name="material"
+                            value={this.state.material}
+                            onChange={this.onChange}
+                            className="form-control"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label>Hạn sữ dụng :</label>
+                          <input
+                            type="date"
+                            name="expiry_date"
+                            value={this.state.expiry_date}
+                            onChange={this.onChange}
+                            className="form-control"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label>Xuất xứ :</label>
+                          <input
+                            type="text"
+                            name="origin"
+                            value={this.state.origin}
+                            onChange={this.onChange}
+                            className="form-control"
+                          />
+                        </div>
+                        <label>Tình trạng hàng :</label>
+                        <select
+                          className="form-control"
+                          name="tinhtranghang"
+                          value={this.state.tinhtranghang}
+                          onChange={this.onChange}
+                          required="required"
+                        >
+                          <option value={true}>Còn hàng</option>
+                          <option value={false}>Hết hàng</option>
+                        </select>
+                        <div className="form-group">
+                          <label>Mô tả :</label>
+                          <input
+                            type="text"
+                            name="description"
+                            value={this.state.description}
+                            onChange={this.onChange}
+                            className="form-control"
+                          />
+                        </div>
+                        <br />
+                        <div className="text-center">
+                          <button type="submit" className="btn btn-primary">
+                            Lưu
+                          </button>
+                          &nbsp;
+                          <button
+                            type="button"
+                            onClick={this.onClear}
+                            className="btn btn-primary"
+                          >
+                            Clear
+                          </button>
+                          <NavLink
+                            to="/product-list"
+                            className="btn btn-primary ml-1"
+                          >
+                            Trở về
+                          </NavLink>
+                        </div>
+                      </form>
+                    </div>
                   </div>
-                  <div className="form-group">
-                    <label>Giá Sản phẩm ($) :</label>
-                    <input type="number" name="price" value ={this.state.price} onChange ={this.onChange} className="form-control" />
-                  </div>
-                  <div className="form-group">
-                    <label>Chọn Ảnh :</label>
-                    <input type="file" name="image" ref ={ (input) => { this.image = input} } onChange ={this.onChange} className="form-control" />
-                  </div>
-                  <label>Loại sản phẩm:</label>
-                  <select className="form-control" name ="name_category" value ={this.state.name_category} onChange ={this.onChange} required="required">
-                    <option value="sản phẩm mới">mới</option>
-                    <option value="sản phẩm hot">hot</option>
-                    <option value="sản phẩm khuyến mãi">khuyến mãi</option>
-                  </select>
-                  <div className="form-group">
-                    <label>Màu bánh :</label>
-                    <input type="text" name="color" value ={this.state.color} onChange ={this.onChange} className="form-control" />
-                  </div>
-                  <div className="form-group">
-                    <label>Nguyên liệu :</label>
-                    <input type="text" name="material" value ={this.state.material} onChange ={this.onChange} className="form-control" />
-                  </div>
-                  <div className="form-group">
-                    <label>Hạn sữ dụng :</label>
-                    <input type="date" name="expiry_date" value ={this.state.expiry_date} onChange ={this.onChange} className="form-control" />
-                  </div>
-                  <div className="form-group">
-                    <label>Xuất xứ :</label>
-                    <input type="text" name="origin" value ={this.state.origin} onChange ={this.onChange} className="form-control" />
-                  </div>
-                  <label>Tình trạng hàng :</label>
-                  <select className="form-control" name ="tinhtranghang" value ={this.state.tinhtranghang} onChange ={this.onChange} required="required">
-                    <option value={true}>Còn hàng</option>
-                    <option value={false}>Hết hàng</option>
-                  </select>
-                  <div className="form-group">
-                    <label>Mô tả :</label>
-                    <input type="text" name="description" value ={this.state.description} onChange ={this.onChange} className="form-control" />
-                  </div>
-                  <br />
-                  <div className="text-center">
-                    <button type="submit"  className="btn btn-primary">Lưu</button>&nbsp;
-                    <button type="button" onClick={this.onClear} className="btn btn-primary">Clear</button>
-                    <NavLink to="/product-list" className="btn btn-primary ml-1">Trở về</NavLink>
-                  </div>
-                </form>
+                </div>
               </div>
-              </div>
-              
-            </div>
-
-
             </div>
           </div>
         </div>
-        </div>
-        </React.Fragment>  
-   		);
+      </React.Fragment>
+    );
 	}
 }
 
