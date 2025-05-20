@@ -536,9 +536,9 @@
 	}
 
 	// Don't do anything if Colorbox already exists.
-	if ($.colorbox) {
-		return;
-	}
+	// if ($.colorbox) {
+	// 	return;
+	// }
 
 	// Append the HTML when the DOM loads
 	$(appendHTML);
